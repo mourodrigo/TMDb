@@ -22,4 +22,12 @@ class Configuration {
         return instance
     }()
     
+    func apiKeyParameter() -> String {
+        return "api_key=" + apiKey
+    }
+    
+    func configurationUrl() -> URL {
+        return URL.init(string: baseUrl + "configuration?" + apiKeyParameter() )!
+    }
+    
 }
