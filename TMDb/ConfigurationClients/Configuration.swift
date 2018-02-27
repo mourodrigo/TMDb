@@ -13,4 +13,13 @@ let apiKey = "1f54bd990f1cdfb230adb312546d765d"
 
 class Configuration {
 
+    private init() {
+        print("Authorization init")
+    }
+    
+    static let sharedInstance: Configuration = {
+        let instance = Configuration()
+        return instance
+    }()
+    
 }
