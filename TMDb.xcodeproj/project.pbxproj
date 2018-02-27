@@ -91,7 +91,7 @@
 		30CA75AC20461DF30044534F /* TMDb */ = {
 			isa = PBXGroup;
 			children = (
-				30CA75D020461F6F0044534F /* ConfigurationClients */,
+				30CA75D020461F6F0044534F /* HttpClients */,
 				30CA75AD20461DF30044534F /* AppDelegate.swift */,
 				30CA75AF20461DF30044534F /* ViewController.swift */,
 				30CA75B120461DF30044534F /* Main.storyboard */,
@@ -111,12 +111,12 @@
 			path = TMDbTests;
 			sourceTree = "<group>";
 		};
-		30CA75D020461F6F0044534F /* ConfigurationClients */ = {
+		30CA75D020461F6F0044534F /* HttpClients */ = {
 			isa = PBXGroup;
 			children = (
 				30CA75D120461FAE0044534F /* Configuration.swift */,
 			);
-			path = ConfigurationClients;
+			path = HttpClients;
 			sourceTree = "<group>";
 		};
 		5218B65B1429300D607A3A1C /* Frameworks */ = {
