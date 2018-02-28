@@ -1,5 +1,5 @@
 //
-//  Configuration.swift
+//  ConfigurationClient.swift
 //  TMDb
 //
 //  Created by Rodrigo Bueno Tomiosso on 27/02/2018.
@@ -14,7 +14,7 @@ import Alamofire
 let baseUrl = "https://api.themoviedb.org/3/"
 let apiKey = "1f54bd990f1cdfb230adb312546d765d"
 
-class Configuration {
+class ConfigurationClient {
     
     var data:JSON?
     
@@ -22,20 +22,24 @@ class Configuration {
         print("Authorization init")
     }
     
-    static let sharedInstance: Configuration = {
-        let instance = Configuration()
+    static let sharedInstance: ConfigurationClient = {
+        let instance = ConfigurationClient()
         return instance
     }()
+    
+    func baseURLPath() -> String {
+        return baseUrl
+    }
     
     func apiKeyParameter() -> String {
         return "api_key=" + apiKey
     }
     
     func configurationUrl() -> URL {
-        return URL.init(string: baseUrl + "configuration?" + apiKeyParameter() )!
+        return URL.init(string: baseURLPath() + "configuration?" + apiKeyParameter() )!
     }
     
-    func fetchConfiguration() {
+    func fetchAll() {
         print("fetching configuration ", configurationUrl())
         Alamofire.request(configurationUrl()).responseJSON { response in
             
