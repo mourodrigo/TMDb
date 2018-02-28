@@ -22,6 +22,9 @@ class MoviesTableViewController: UITableViewController, UISearchBarDelegate {
     }
 
     override func viewDidAppear(_ animated: Bool) {
+        if movies.count == 0 {
+            movieClient.fetchUpcoming()
+        }
     }
     // MARK: - Table view data source
     
@@ -64,7 +67,7 @@ class MoviesTableViewController: UITableViewController, UISearchBarDelegate {
         
         if let date = movie.releaseDate {
             cell.releaseDateTextLabel.isHidden = false
-            cell.releaseDateTextLabel.text = date.toString()
+            cell.releaseDateTextLabel.text = "Release date: " + date.toString()
         } else {
             cell.releaseDateTextLabel.isHidden = true
         }
@@ -81,9 +84,14 @@ class MoviesTableViewController: UITableViewController, UISearchBarDelegate {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let movie = movies[indexPath.row]
+        self.performSegue(withIdentifier: "ShowMovieDetailViewController", sender: movie)
+    }
+    
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row > movies.count - 2, !movieClient.isWorking {
-            if let searchText = searchBar.text {
+            if let searchText = searchBar.text, searchText.count > 0 {
                 movieClient.fetchSearch(having: searchText, on: movieClient.lastFetchPage+1)
             } else {
                 movieClient.fetchMoreUpcoming()
@@ -94,10 +102,14 @@ class MoviesTableViewController: UITableViewController, UISearchBarDelegate {
     // MARK: - Search bar
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-        if let searchText = searchBar.text {
+        if let searchText = searchBar.text, searchText.count > 0 {
             self.movies.removeAll()
             self.tableView.reloadData()
             movieClient.fetchSearch(having: searchText)
+        } else {
+            self.movies.removeAll()
+            self.tableView.reloadData()
+            movieClient.fetchMoreUpcoming()
         }
     }
     
@@ -106,15 +118,13 @@ class MoviesTableViewController: UITableViewController, UISearchBarDelegate {
         movies.removeAll()
     }
 
-    
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "ShowMovieDetailViewController",
+            let movie = sender as? Movie,
+            let destination = segue.destination as? MovieDetailViewController {
+            destination.movie = movie
+        }
     }
-    */
-
 }
