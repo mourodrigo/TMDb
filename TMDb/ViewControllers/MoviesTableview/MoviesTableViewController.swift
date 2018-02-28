@@ -50,8 +50,9 @@ class MoviesTableViewController: UITableViewController {
         
         let movie = movies[indexPath.row]
         
-        cell.titleTextLabel.text = movie.title
         
+        cell.titleTextLabel.text = movie.title
+        cell.posterImageView.downloadedFrom(link: ConfigurationClient.sharedInstance.imageBaseURLPath() + "w342" + movie.posterPath)
         return cell
     }
     
