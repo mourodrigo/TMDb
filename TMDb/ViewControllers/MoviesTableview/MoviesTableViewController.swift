@@ -15,12 +15,17 @@ class MoviesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         registerMovieClientObserver()
+        self.refreshControl?.addTarget(self, action: #selector(reloadDataSource), for: .valueChanged)
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        MovieClient.fetchUpcoming()
     }
     // MARK: - Table view data source
+    
+    @objc func reloadDataSource() {
+        self.tableView.refreshControl?.beginRefreshing()
+        MovieClient.fetchUpcoming()
+    }
     
     func registerMovieClientObserver() {
         NotificationCenter.default.addObserver(forName: NSNotification.Name.init("didfetchMovies"),
@@ -30,6 +35,7 @@ class MoviesTableViewController: UITableViewController {
             
             if let newMovies = notification.object as? [Movie] {
                 self.movies.append(contentsOf: newMovies)
+                self.tableView.refreshControl?.endRefreshing()
                 self.tableView.reloadData()
             }
             
@@ -43,13 +49,11 @@ class MoviesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return movies.count
     }
-
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieTableViewCell", for: indexPath) as! MovieTableViewCell
         
         let movie = movies[indexPath.row]
-        
         
         cell.titleTextLabel.text = movie.title
         cell.posterImageView.downloadedFrom(link: ConfigurationClient.sharedInstance.imageBaseURLPath() + "w342" + movie.posterPath)
