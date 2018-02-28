@@ -13,10 +13,10 @@ class Movie {
     let title: String
     let backdropPath: String
     let overview: String
-    let releaseDate: Date
+    let releaseDate: Date?
     let genreIds: [Int]
     
-    init(id: Int, title: String, backdropPath: String, overview: String, releaseDate: Date, genreIds: [Int]) {
+    init(id: Int, title: String, backdropPath: String, overview: String, releaseDate: Date?, genreIds: [Int]) {
         self.id = id
         self.title = title
         self.backdropPath = backdropPath
