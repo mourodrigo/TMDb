@@ -8,22 +8,26 @@
 
 import UIKit
 
-class MoviesTableViewController: UITableViewController {
+class MoviesTableViewController: UITableViewController, UISearchBarDelegate {
 
+    @IBOutlet weak var searchBar: UISearchBar!
+    let movieClient = MovieClient()
+    
     var movies = [Movie]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         registerMovieClientObserver()
-        self.refreshControl?.addTarget(self, action: #selector(reloadDataSource), for: .valueChanged)
+        self.refreshControl?.addTarget(self, action: #selector(prepareToFetch), for: .valueChanged)
     }
 
     override func viewDidAppear(_ animated: Bool) {
     }
     // MARK: - Table view data source
     
-    @objc func reloadDataSource() {
+    @objc func prepareToFetch() {
         self.tableView.refreshControl?.beginRefreshing()
+        self.movies.removeAll()
         movieClient.fetchUpcoming()
     }
     
