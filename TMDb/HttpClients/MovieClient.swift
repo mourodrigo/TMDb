@@ -45,17 +45,7 @@ class MovieClient {
                         let moviesArray = results.array {
                                                 
                         for movie in moviesArray {
-                            
-                            let newMovie = Movie(id: movie["id"].intValue,
-                                                 title: movie["title"].stringValue,
-                                                 backdropPath: movie["backdrop_path"].stringValue,
-                                                 posterPath: movie["poster_path"].stringValue,
-                                                 overview: movie["overview"].stringValue,
-                                                 releaseDate: movie["release_date"].stringValue.toDate(),
-                                                 genreIds: movie["genre_ids"].arrayValue.flatMap({ (json) -> Int in
-                                                                                                    return json.intValue
-                                                                                                 })
-                            )
+                            let newMovie = Movie(json: movie)
                             fetchedMovies.append(newMovie)
                         }
                     }
@@ -64,7 +54,5 @@ class MovieClient {
                 self.isWorking = false
             }
         }
-    
     }
-    
 }
