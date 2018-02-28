@@ -10,7 +10,6 @@
 
 import SwiftyJSON
 import Alamofire
-
 import Foundation
 
 class GenreClient {
