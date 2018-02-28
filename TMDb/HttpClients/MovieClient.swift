@@ -13,11 +13,11 @@ import Foundation
 
 class MovieClient {
     
-    var upComingLastPage = 1
+    var lastFetchPage = 1
     var isWorking = false
 
     func fetchMoreUpcoming() {
-        self.fetchUpcoming(on: upComingLastPage+1)
+        self.fetchUpcoming(on: lastFetchPage+1)
     }
     
     func fetchUpcoming(on page:Int = 1) {
@@ -39,11 +39,47 @@ class MovieClient {
                     var fetchedMovies = [Movie]()
                     let json = JSON(value)
                     
-                    self.upComingLastPage = page
+                    self.lastFetchPage = page
                     
                     if  let results = json.dictionaryValue["results"],
                         let moviesArray = results.array {
                                                 
+                        for movie in moviesArray {
+                            let newMovie = Movie(json: movie)
+                            fetchedMovies.append(newMovie)
+                        }
+                    }
+                    NotificationCenter.default.post(name: NSNotification.Name.init("didfetchMovies"), object: fetchedMovies)
+                }
+                self.isWorking = false
+            }
+        }
+    }
+    
+    func fetchSearch(having searchQuery:String, on page:Int = 1) {
+        if let upcomingURL = URL.init(string:
+            ConfigurationClient.sharedInstance.baseURLPath() +
+                "search/movie?" +
+                ConfigurationClient.sharedInstance.apiKeyParameter()
+                + "&query=\(searchQuery.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? "")"
+                + "&page=\(page)") {
+            
+            print("fetching search ", upcomingURL)
+            
+            isWorking = true
+            
+            Alamofire.request(upcomingURL).responseJSON { response in
+                
+                if response.response?.statusCode == 200, let value = response.result.value {
+                    
+                    var fetchedMovies = [Movie]()
+                    let json = JSON(value)
+                    
+                    self.lastFetchPage = page
+                    
+                    if  let results = json.dictionaryValue["results"],
+                        let moviesArray = results.array {
+                        
                         for movie in moviesArray {
                             let newMovie = Movie(json: movie)
                             fetchedMovies.append(newMovie)

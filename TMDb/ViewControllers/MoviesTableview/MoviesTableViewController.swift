@@ -82,15 +82,23 @@ class MoviesTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row > movies.count - 3, !movieClient.isWorking {
-            movieClient.fetchMoreUpcoming()
+        if indexPath.row > movies.count - 2, !movieClient.isWorking {
+            if let searchText = searchBar.text {
+                movieClient.fetchSearch(having: searchText, on: movieClient.lastFetchPage+1)
+            } else {
+                movieClient.fetchMoreUpcoming()
+            }
         }
     }
     
     // MARK: - Search bar
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-        
+        if let searchText = searchBar.text {
+            self.movies.removeAll()
+            self.tableView.reloadData()
+            movieClient.fetchSearch(having: searchText)
+        }
     }
     
     override func didReceiveMemoryWarning() {
