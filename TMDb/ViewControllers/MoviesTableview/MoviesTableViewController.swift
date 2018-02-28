@@ -61,6 +61,15 @@ class MoviesTableViewController: UITableViewController {
             cell.releaseDateTextLabel.isHidden = true
         }
         
+        cell.genreTextLabel.isHidden = true
+        cell.genreTextLabel.text = ""
+        for genreId in movie.genreIds {
+            if let genre = GenreClient.sharedInstance.genresList[genreId] {
+                cell.genreTextLabel.text = cell.genreTextLabel.text! + genre + "; "
+                cell.genreTextLabel.isHidden = false
+            }
+        }
+        
         return cell
     }
     
