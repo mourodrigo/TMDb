@@ -28,8 +28,6 @@ class MovieClient {
                                         ConfigurationClient.sharedInstance.apiKeyParameter()
                                         + "&page=\(page)") {
             
-            print("fetching upcomingURL ", upcomingURL)
-
             isWorking = true
             
             Alamofire.request(upcomingURL).responseJSON { response in

@@ -19,7 +19,7 @@ class ConfigurationClient {
     var data:JSON?
     
     private init() {
-        print("Authorization init")
+        print("Configuration init")
     }
     
     static let sharedInstance: ConfigurationClient = {
@@ -46,12 +46,10 @@ class ConfigurationClient {
     }
     
     func fetchAll() {
-        print("fetching configuration ", configurationUrl())
         Alamofire.request(configurationUrl()).responseJSON { response in
             
             if response.response?.statusCode == 200, let value = response.result.value {
                 self.data = JSON(value)
-                print("CONFIGURATION ", self.data)
             }
             NotificationCenter.default.post(name: NSNotification.Name.init("didfetchConfiguration"), object: self.data)
         }

@@ -17,7 +17,7 @@ class GenreClient {
     var genresList = [Int:String]()
     
     private init() {
-        print("Authorization init")
+        print("Genre init")
     }
     
     static let sharedInstance: GenreClient = {
@@ -30,7 +30,6 @@ class GenreClient {
     }
     
     func fetchAll() {
-        print("fetching GenreClient ", apiUrl())
         Alamofire.request(apiUrl()).responseJSON { response in
             
             if response.response?.statusCode == 200, let value = response.result.value {
