@@ -39,6 +39,12 @@ class ConfigurationClient {
         return URL.init(string: baseURLPath() + "configuration?" + apiKeyParameter() )!
     }
     
+    func imageBaseURLPath() -> String {
+        guard let images = data?["images"] else { return "" }
+        let secureBaseUrl = images["secure_base_url"].stringValue
+        return secureBaseUrl
+    }
+    
     func fetchAll() {
         print("fetching configuration ", configurationUrl())
         Alamofire.request(configurationUrl()).responseJSON { response in
