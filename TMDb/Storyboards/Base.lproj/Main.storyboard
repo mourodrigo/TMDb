@@ -26,30 +26,30 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="105.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AdN-Ng-a7F">
-                                            <rect key="frame" x="16" y="5" width="95" height="95"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AdN-Ng-a7F">
+                                            <rect key="frame" x="8" y="5" width="60" height="95"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="95" id="3fx-Lm-7wt"/>
-                                                <constraint firstAttribute="width" constant="95" id="jFE-gz-w3f"/>
+                                                <constraint firstAttribute="width" constant="60" id="jFE-gz-w3f"/>
                                             </constraints>
                                         </imageView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="AC0-Lx-0of">
-                                            <rect key="frame" x="127" y="11" width="177" height="84"/>
+                                            <rect key="frame" x="76" y="11" width="228" height="84"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Maximum text that will fit on the smaller screen available without truncate" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="LLI-br-1cY">
-                                                    <rect key="frame" x="0.0" y="0.0" width="177" height="28"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="228" height="28"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sw3-Ad-nP3">
-                                                    <rect key="frame" x="0.0" y="28" width="177" height="28"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sw3-Ad-nP3">
+                                                    <rect key="frame" x="0.0" y="28" width="228" height="28"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GtL-Q2-HXj">
-                                                    <rect key="frame" x="0.0" y="56" width="177" height="28"/>
+                                                    <rect key="frame" x="0.0" y="56" width="228" height="28"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -59,10 +59,10 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="bottomMargin" secondItem="AC0-Lx-0of" secondAttribute="bottom" id="9q8-Fl-LDU"/>
-                                        <constraint firstItem="AdN-Ng-a7F" firstAttribute="leading" secondItem="dfL-ik-HBA" secondAttribute="leadingMargin" id="ARJ-BO-aCN"/>
                                         <constraint firstItem="AdN-Ng-a7F" firstAttribute="centerY" secondItem="dfL-ik-HBA" secondAttribute="centerY" id="XPk-o8-AhK"/>
-                                        <constraint firstItem="AC0-Lx-0of" firstAttribute="leading" secondItem="AdN-Ng-a7F" secondAttribute="trailing" constant="16" id="Zej-cc-gBP"/>
+                                        <constraint firstItem="AC0-Lx-0of" firstAttribute="leading" secondItem="AdN-Ng-a7F" secondAttribute="trailing" constant="8" id="Zej-cc-gBP"/>
                                         <constraint firstItem="AC0-Lx-0of" firstAttribute="top" secondItem="dfL-ik-HBA" secondAttribute="topMargin" id="b6p-EB-N31"/>
+                                        <constraint firstItem="AdN-Ng-a7F" firstAttribute="leading" secondItem="dfL-ik-HBA" secondAttribute="leading" constant="8" id="hrV-Dz-YMy"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="AC0-Lx-0of" secondAttribute="trailing" id="ovC-mx-zsU"/>
                                     </constraints>
                                 </tableViewCellContentView>
