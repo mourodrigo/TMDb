@@ -14,21 +14,34 @@ class MoviesTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        registerMovieClientObserver()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        movies.removeAll()
+    override func viewDidAppear(_ animated: Bool) {
+        MovieClient.fetchUpcoming()
     }
-
     // MARK: - Table view data source
+    
+    func registerMovieClientObserver() {
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.init("didfetchMovies"),
+                                               object: nil,
+                                               queue: OperationQueue.main)
+        { (notification) in
+            
+            if let newMovies = notification.object as? [Movie] {
+                self.movies.append(contentsOf: newMovies)
+                self.tableView.reloadData()
+            }
+            
+        }
+    }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fetchedMovies.count
+        return movies.count
     }
 
     
@@ -41,6 +54,12 @@ class MoviesTableViewController: UITableViewController {
         
         return cell
     }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        movies.removeAll()
+    }
+
     
     /*
     // MARK: - Navigation
