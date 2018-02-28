@@ -19,16 +19,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Z9Y-Th-N0S">
-                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Z9Y-Th-N0S" id="RgI-85-tFD">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="106" id="UvQ-fm-ZNN">
-                                <rect key="frame" x="0.0" y="72" width="320" height="106"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MovieTableViewCell" rowHeight="106" id="UvQ-fm-ZNN" customClass="MovieTableViewCell" customModule="TMDb" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="320" height="106"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UvQ-fm-ZNN" id="dfL-ik-HBA">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="105.5"/>
@@ -74,6 +66,12 @@
                                         <constraint firstAttribute="trailingMargin" secondItem="AC0-Lx-0of" secondAttribute="trailing" id="ovC-mx-zsU"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="genreTextLabel" destination="sw3-Ad-nP3" id="KRr-Sa-7wL"/>
+                                    <outlet property="posterImageView" destination="AdN-Ng-a7F" id="SL7-Tk-Epb"/>
+                                    <outlet property="releaseDateTextLabel" destination="GtL-Q2-HXj" id="oT4-Da-0jB"/>
+                                    <outlet property="titleTextLabel" destination="LLI-br-1cY" id="JjM-eA-Ap5"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
