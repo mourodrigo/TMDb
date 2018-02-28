@@ -32,6 +32,7 @@ class MovieClient {
                             let newMovie = Movie(id: movie["id"].intValue,
                                                  title: movie["title"].stringValue,
                                                  backdropPath: movie["backdrop_path"].stringValue,
+                                                 posterPath: movie["poster_path"].stringValue,
                                                  overview: movie["overview"].stringValue,
                                                  releaseDate: movie["release_date"].stringValue.toDate(),
                                                  genreIds: []
