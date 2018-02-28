@@ -27,8 +27,7 @@ class MovieClient {
 
                     if  let results = json.dictionaryValue["results"],
                         let moviesArray = results.array {
-                        
-                        
+                                                
                         for movie in moviesArray {
                             let newMovie = Movie(id: movie["id"].intValue,
                                                  title: movie["title"].stringValue,
