@@ -81,6 +81,18 @@ class MoviesTableViewController: UITableViewController, UISearchBarDelegate {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row > movies.count - 3, !movieClient.isWorking {
+            movieClient.fetchMoreUpcoming()
+        }
+    }
+    
+    // MARK: - Search bar
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         movies.removeAll()
