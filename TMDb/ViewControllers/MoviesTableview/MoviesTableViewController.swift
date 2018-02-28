@@ -24,7 +24,7 @@ class MoviesTableViewController: UITableViewController {
     
     @objc func reloadDataSource() {
         self.tableView.refreshControl?.beginRefreshing()
-        MovieClient.fetchUpcoming()
+        movieClient.fetchUpcoming()
     }
     
     func registerMovieClientObserver() {

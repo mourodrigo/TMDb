@@ -12,8 +12,6 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        MovieClient.fetchUpcoming()
-
     }
 
     override func didReceiveMemoryWarning() {

@@ -13,18 +13,34 @@ import Foundation
 
 class MovieClient {
     
-    class func fetchUpcoming() {
+    var upComingLastPage = 1
+    var isWorking = false
+
+    func fetchMoreUpcoming() {
+        self.fetchUpcoming(on: upComingLastPage+1)
+    }
+    
+    func fetchUpcoming(on page:Int = 1) {
         
-        if let upcomingURL = URL.init(string: ConfigurationClient.sharedInstance.baseURLPath() + "movie/upcoming?" + ConfigurationClient.sharedInstance.apiKeyParameter() ) {
+        if let upcomingURL = URL.init(string:
+                                        ConfigurationClient.sharedInstance.baseURLPath() +
+                                        "movie/upcoming?" +
+                                        ConfigurationClient.sharedInstance.apiKeyParameter()
+                                        + "&page=\(page)") {
+            
             print("fetching upcomingURL ", upcomingURL)
 
+            isWorking = true
+            
             Alamofire.request(upcomingURL).responseJSON { response in
                 
                 if response.response?.statusCode == 200, let value = response.result.value {
                     
                     var fetchedMovies = [Movie]()
                     let json = JSON(value)
-
+                    
+                    self.upComingLastPage = page
+                    
                     if  let results = json.dictionaryValue["results"],
                         let moviesArray = results.array {
                                                 
@@ -45,6 +61,7 @@ class MovieClient {
                     }
                     NotificationCenter.default.post(name: NSNotification.Name.init("didfetchMovies"), object: fetchedMovies)
                 }
+                self.isWorking = false
             }
         }
     
