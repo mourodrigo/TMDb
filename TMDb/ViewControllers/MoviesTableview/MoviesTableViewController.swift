@@ -53,6 +53,14 @@ class MoviesTableViewController: UITableViewController {
         
         cell.titleTextLabel.text = movie.title
         cell.posterImageView.downloadedFrom(link: ConfigurationClient.sharedInstance.imageBaseURLPath() + "w342" + movie.posterPath)
+        
+        if let date = movie.releaseDate {
+            cell.releaseDateTextLabel.isHidden = false
+            cell.releaseDateTextLabel.text = date.toString()
+        } else {
+            cell.releaseDateTextLabel.isHidden = true
+        }
+        
         return cell
     }
     
